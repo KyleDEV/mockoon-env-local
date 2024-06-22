@@ -1,14 +1,30 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Nginx & Mockoon</title>
+    <meta charset="UTF-8">
+    <title>Nginx & Mockoon</title>
 </head>
+
 <body>
     <h1>Mockoon Server - Mocking API</h1>
-    <p>NginX가 /api/ 하위에 Mockoon 엔드포인트를 연결했습니다.<p>
-        <ul>
-            <li>GET: <a href="/api/template">/api/template</a></li>
-        </ul>
+    <p>NginX가 /api/ 하위에 Mockoon 엔드포인트를 연결했습니다.</p>
+
+    <h2>Mockoon API evironment 데이터 교체 방법</h2>
+    <p>/mockoon/data/evergreen.json을 원하는 데이터로 교체한 뒤 /moockoon-env-local 에서 docker-compose의 mockoon-cli를 재시작해주세요</p>
+    <ul>
+        <li>Mockoon 서비스만 재시작하려면:
+            <ul>
+                <li>docker-compose restart mockoon</li>
+            </ul>
+        </li>
+        <li>이미지를 다시 빌드하고 재시작하려면:
+            <ul>
+                <li>docker-compose build mockoon</li>
+                <li>docker-compose up -d mockoon</li>
+            </ul>
+        </li>
+    </ul>
 </body>
+
 </html>
