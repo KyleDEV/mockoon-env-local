@@ -17,7 +17,7 @@ COPY . .
 RUN python3 -m venv /usr/src/app/venv
 
 # Activate the virtual environment and install Python dependencies
-RUN /usr/src/app/venv/bin/pip install -r /usr/src/app/requirements.txt
+RUN /usr/src/app/venv/bin/pip install -r /usr/src/app/python-dependencies.txt
 
 # Expose port 3000
 EXPOSE 3000
