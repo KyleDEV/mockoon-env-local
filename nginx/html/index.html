@@ -1,14 +1,84 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Nginx & Mockoon</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mockoon</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Mockoon Server - Mocking API</h1>
-    <p>NginX가 /api/ 하위에 Mockoon 엔드포인트를 연결했습니다.<p>
-        <ul>
-            <li>GET: <a href="/api/template">/api/template</a></li>
-        </ul>
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Mockoon Server</h1>
+            <p class="lead">NginX가 /api/ 하위에 Mockoon 엔드포인트를 연결했습니다.</p>
+            <hr class="my-4">
+            <ul>
+                <li>Mocking API: <a href="http://localhost:8080/api/">http://localhost:8080/api/{엔드포인트}</a></li>
+                <li>Swagger UI: <a href="http://localhost:8080/swagger/">http://localhost:8080/swagger/</a></li>
+            </ul>
+        </div>
+        
+        <h2>Mockoon API Environment 데이터 교체 방법</h2>
+        <p>/mockoon/data/evergreen.json을 원하는 데이터로 교체한 뒤 /moockoon-env-local 에서 docker-compose의 mockoon을 재시작해주세요. mockoon을 재시작하면 Swagger UI 또한 업데이트 됩니다.</p>
+        
+        <div class="card">
+            <div class="card-header">
+                Mockoon 서비스 관리
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">서비스 재시작</h5>
+                <p class="card-text">Mockoon 서비스만 재시작하려면:</p>
+                <ul>
+                    <li><code>docker-compose restart mockoon</code></li>
+                </ul>
+                <h5 class="card-title">이미지를 다시 빌드하고 재시작</h5>
+                <p class="card-text">이미지를 다시 빌드하고 재시작하려면:</p>
+                <ul>
+                    <li><code>docker-compose build mockoon</code></li>
+                    <li><code>docker-compose up -d mockoon</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                Docker Compose 전체 관리
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">전체 서비스 재시작</h5>
+                <p class="card-text">전체 서비스를 재시작하려면:</p>
+                <ul>
+                    <li><code>docker-compose restart</code></li>
+                </ul>
+                <h5 class="card-title">전체 이미지 빌드 및 재시작</h5>
+                <p class="card-text">전체 이미지를 다시 빌드하고 재시작하려면:</p>
+                <ul>
+                    <li><code>docker-compose build</code></li>
+                    <li><code>docker-compose up -d</code></li>
+                </ul>
+                <h5 class="card-title">전체 서비스 중지</h5>
+                <p class="card-text">전체 서비스를 중지하려면:</p>
+                <ul>
+                    <li><code>docker-compose down</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container">
+            <a href="https://github.com/KyleDEV/mockoon-env-local" target="_blank" class="text-muted float-left">GitHub Repository @KyleDev</a>
+            <span class="text-muted float-right">© Kyle KIM</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

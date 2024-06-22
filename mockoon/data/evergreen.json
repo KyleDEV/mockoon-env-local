@@ -1,7 +1,7 @@
 {
   "uuid": "d5e44d7c-fc0c-4844-a79d-1806eb977f5b",
   "lastMigration": 32,
-  "name": "Demo API",
+  "name": "My API",
   "endpointPrefix": "",
   "latency": 0,
   "port": 3000,
