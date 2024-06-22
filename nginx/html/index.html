@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Nginx & Mockoon</title>
+    <title>Mockoon</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -12,10 +12,13 @@
 <body>
     <div class="container mt-5">
         <div class="jumbotron">
-            <h1 class="display-4">Mockoon Server - Mocking API</h1>
+            <h1 class="display-4">Mockoon Server</h1>
             <p class="lead">NginX가 /api/ 하위에 Mockoon 엔드포인트를 연결했습니다.</p>
             <hr class="my-4">
-            <p>Swagger UI: <a href="http://localhost:8080/swagger/">http://localhost:8080/swagger/</a></p>
+            <ul>
+                <li>Mocking API: <a href="http://localhost:8080/api/">http://localhost:8080/api/{엔드포인트}</a></li>
+                <li>Swagger UI: <a href="http://localhost:8080/swagger/">http://localhost:8080/swagger/</a></li>
+            </ul>
         </div>
         
         <h2>Mockoon API Environment 데이터 교체 방법</h2>
@@ -65,7 +68,17 @@
         </div>
     </div>
 
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container">
+            <a href="https://github.com/KyleDEV/mockoon-env-local" target="_blank" class="text-muted float-left">GitHub Repository @KyleDev</a>
+            <span class="text-muted float-right">© Kyle KIM</span>
+        </div>
+    </footer>
+
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
