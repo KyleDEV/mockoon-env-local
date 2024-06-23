@@ -12,57 +12,106 @@ def generate_swagger(mockoon_data):
 
     for route in mockoon_data["routes"]:
         path = f"/api/{route['endpoint']}"
-        method = route['method']
-        responses = {}
+        if route["type"] == "crud":
+            # Handle CRUD endpoints
+            for method in ["get", "post", "put", "delete"]:
+                if path not in swagger["paths"]:
+                    swagger["paths"][path] = {}
 
-        for response in route["responses"]:
-            # Assuming response body is a JSON object or faker template
-            try:
-                response_body = json.loads(response["body"])
-            except json.JSONDecodeError:
-                response_body = response["body"]  # Keeping the body as string if not JSON
+                responses = {}
+                for response in route["responses"]:
+                    try:
+                        response_body = json.loads(response["body"])
+                    except json.JSONDecodeError:
+                        response_body = response["body"]
 
-            # Creating the response content schema
-            if isinstance(response_body, dict):
-                schema = {
-                    "type": "object",
-                    "example": response_body
-                }
-            else:
-                schema = {
-                    "type": "string",
-                    "example": response_body
-                }
+                    if isinstance(response_body, dict):
+                        schema = {
+                            "type": "object",
+                            "example": response_body
+                        }
+                    else:
+                        schema = {
+                            "type": "string",
+                            "example": response_body
+                        }
 
-            responses[str(response["statusCode"])] = {
-                "description": response["label"],
-                "content": {
-                    "application/json": {
-                        "schema": schema
+                    responses[str(response["statusCode"])] = {
+                        "description": response["label"],
+                        "content": {
+                            "application/json": {
+                                "schema": schema
+                            }
+                        }
                     }
+
+                swagger["paths"][path][method] = {
+                    "summary": route["documentation"],
+                    "responses": responses
                 }
-            }
 
-        if path not in swagger["paths"]:
-            swagger["paths"][path] = {}
+                if method in ["post", "put"]:
+                    request_body = {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                    swagger["paths"][path][method]["requestBody"] = request_body
 
-        swagger["paths"][path][method] = {
-            "summary": route["documentation"],
-            "responses": responses
-        }
+        else:
+            # Handle regular endpoints
+            method = route['method']
+            responses = {}
 
-        # Add request body if available
-        if route["responses"]:
-            request_body = {
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object"
+            for response in route["responses"]:
+                try:
+                    response_body = json.loads(response["body"])
+                except json.JSONDecodeError:
+                    response_body = response["body"]
+
+                if isinstance(response_body, dict):
+                    schema = {
+                        "type": "object",
+                        "example": response_body
+                    }
+                else:
+                    schema = {
+                        "type": "string",
+                        "example": response_body
+                    }
+
+                responses[str(response["statusCode"])] = {
+                    "description": response["label"],
+                    "content": {
+                        "application/json": {
+                            "schema": schema
                         }
                     }
                 }
+
+            if path not in swagger["paths"]:
+                swagger["paths"][path] = {}
+
+            swagger["paths"][path][method] = {
+                "summary": route["documentation"],
+                "responses": responses
             }
-            swagger["paths"][path][method]["requestBody"] = request_body
+
+            if route["responses"] and method in ["post", "put"]:
+                request_body = {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+                swagger["paths"][path][method]["requestBody"] = request_body
 
     return swagger
 
