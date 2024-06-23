@@ -1,5 +1,5 @@
 # Mockoon Data
-evergreen.json
+/mockoon/data/
 
 # 파이썬에 의해 생성되는 swagger spec 파일
 swagger.json 
